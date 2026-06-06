@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/brand/logo.png" />
+    <title>dnd-player — плеер .dndsession</title>
+  </head>
+  <body>
+    <div id="drop-zone">
+      <img src="/brand/logo.svg" alt="no harm org" width="72" height="72" />
+      <h1>dnd-player</h1>
+      <p>Перетащи сюда файл <code>.dndsession</code><br />или</p>
+      <label class="file-btn">
+        выбери файл
+        <input id="file-input" type="file" accept=".dndsession,.zip" hidden />
+      </label>
+      <p id="drop-error"></p>
+    </div>
+
+    <div id="player" class="hidden">
+      <canvas id="scene"></canvas>
+      <div id="controls">
+        <button id="play-btn" title="Play/Pause (пробел)">▶</button>
+        <input id="seek" type="range" min="0" max="1000" value="0" step="1" />
+        <span id="timecode">00:00 / 00:00</span>
+      </div>
+      <div id="session-info"></div>
+    </div>
+
+    <footer>☮ <b>no harm org</b> · Kirkamah · © 2026 Kirkamah · no harm org</footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
