@@ -23,6 +23,15 @@ const fileInput = $('#file-input') as unknown as HTMLInputElement;
 canvas.width = SCENE_W;
 canvas.height = SCENE_H;
 
+// Контекст создаём один раз при старте: если 2D недоступен (GPU/драйвер),
+// говорим об этом сразу и понятно, а не после выбора файла.
+const ctx2d =
+  canvas.getContext('2d') ?? canvas.getContext('2d', { willReadFrequently: true });
+if (!ctx2d) {
+  dropError.textContent =
+    'Браузер не смог создать 2D-канвас (обычно это аппаратное ускорение/драйвер видеокарты).';
+}
+
 let scene: LoadedScene | null = null;
 let renderer: SceneRenderer | null = null;
 let player: MultiTrackPlayer | null = null;
@@ -34,10 +43,9 @@ async function openFile(file: File): Promise<void> {
   dropError.textContent = '';
   dropZone.classList.add('loading');
   try {
+    if (!ctx2d) throw new Error('Canvas 2D недоступен — см. сообщение выше');
     scene = await loadBundle(await file.arrayBuffer());
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas 2D недоступен');
-    renderer = new SceneRenderer(ctx, scene);
+    renderer = new SceneRenderer(ctx2d, scene);
     player = new MultiTrackPlayer(scene.audio, scene.manifest.durationMs);
     player.onEnded = updatePlayButton;
 

@@ -17,10 +17,15 @@
 
 ## Запуск
 
+Десктопное приложение (Electron). Готовый exe после сборки:
+`release\win-unpacked\DnD Player.exe` (его же запускает ярлык «DnD Player» на рабочем
+столе) и одно-файловый портативный `release\DnD-Player-<версия>.exe`.
+
 ```bash
 npm install
-npm run dev        # http://localhost:5173
-# либо production: npm run build && npm run preview
+npm run app        # сборка + запуск десктоп-приложения
+npm run dist       # пересобрать exe (release/)
+npm run dev        # чисто веб-режим для разработки (http://localhost:5173)
 ```
 
 Перетащи `.dndsession` в окно (или выбери файл) → play. Пробел — play/pause.
@@ -53,11 +58,12 @@ npm run dev        # http://localhost:5173
 ## Проверка
 
 ```bash
-node scripts/verify.mjs [путь к .dndsession]
+node scripts/verify.mjs [путь к .dndsession]            # веб-версия (headless-Chromium)
+node scripts/verify-electron.mjs [путь к .dndsession]   # десктоп-версия (Electron)
 ```
 
-Открывает собранный плеер в headless-Chromium, загружает бандл, мотает на момент
-реплики, проверяет ход таймкода и снимает скриншоты в `.verify/`.
+Оба загружают реальный бандл, мотают на момент реплики, проверяют ход таймкода
+и снимают скриншоты в `.verify/`.
 
 ## Ограничения v1
 
