@@ -45,6 +45,17 @@
     },
     "portable": {
       "artifactName": "DnD-Player-${version}.exe"
+    },
+    "afterPack": "scripts/afterPack.cjs",
+    "mac": {
+      "icon": "brand/logo.png",
+      "category": "public.app-category.entertainment",
+      "minimumSystemVersion": "11.0",
+      "identity": null,
+      "target": [
+        { "target": "zip", "arch": ["x64", "arm64"] }
+      ],
+      "artifactName": "DnD-Player-mac-${arch}.${ext}"
     }
   }
 }
