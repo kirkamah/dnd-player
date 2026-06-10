@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "app": "npm run build && electron .",
     "dist": "npm run build && electron-builder --win",
-    "dist:dir": "npm run build && electron-builder --win --dir"
+    "dist:dir": "npm run build && electron-builder --win --dir",
+    "dist:trial": "node scripts/build-trial.mjs"
   },
   "dependencies": {
     "fflate": "^0.8.2"

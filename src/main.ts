@@ -2,6 +2,7 @@ import { loadBundle, type LoadedScene } from './bundle-loader';
 import { SceneRenderer, SCENE_W, SCENE_H } from './scene-renderer';
 import { stateAt } from './scene-state';
 import { MultiTrackPlayer } from './audio-player';
+import { IS_TRIAL } from './trial';
 import './style.css';
 
 const $ = <T extends HTMLElement>(sel: string): T => {
@@ -142,3 +143,15 @@ function loop(): void {
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
+
+// ---------- пробная версия ----------
+// Плеер не ограничен по функциям — только пометка и ссылка на полный набор.
+if (IS_TRIAL) {
+  document.title = 'DnD Player Trial — плеер .dndsession';
+  const note = document.createElement('div');
+  note.id = 'trial-note';
+  note.innerHTML =
+    'Пробная версия · полный набор приложений no harm org — ' +
+    '<a href="https://boosty.to/no.harm.org" target="_blank" rel="noopener">Boosty</a>';
+  document.body.append(note);
+}

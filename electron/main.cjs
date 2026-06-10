@@ -1,6 +1,9 @@
 /** Десктоп-обвязка dnd-player: одно окно, рендерер — собранный Vite dist/. */
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, nativeTheme } = require('electron');
 const path = require('node:path');
+
+// Тёмный нативный заголовок окна — в тон фону приложения (#0b0d11).
+nativeTheme.themeSource = 'dark';
 
 function createWindow() {
   const win = new BrowserWindow({
